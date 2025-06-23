@@ -32,4 +32,39 @@ php artisan serve
 ```
 ---
 
+### 🎯 Role-Based Access Control (RBAC) Sederhana di Laravel Fortify
+Aplikasi ini menggunakan sistem role sederhana untuk membatasi akses user ke halaman, route, dan fitur tertentu berdasarkan peran (role).
+
+## 🖼️ Penggunaan Role di Blade View
+
+```javascript
+
+{{-- Tampilkan menu khusus admin --}}
+@if (auth()->user()->role === 'admin')
+    <a href="/admin">Admin Panel</a>
+@endif
+
+{{-- Tampilkan menu kasir --}}
+@if (auth()->user()->role === 'kasir')
+    <a href="/kasir">Transaksi</a>
+@endif
+
+```
+
+## 🧩 Penggunaan Role di Controller
+
+```javascript
+
+public function index()
+{
+    if (auth()->user()->role !== 'admin') {
+        abort(403);
+    }
+
+    // logic admin
+    return view('admin.dashboard');
+}
+
+```
+
 **Start editing** the left panel to see your markdown come to life! 🚀
