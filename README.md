@@ -11,7 +11,7 @@ It contains no additional packages, scaffolding, or customizations — perfect f
 
 ### 1. Clone the repository
 ```javascript
-git clone https://github.com/your-username/your-laravel10-project.git your-project-name
+git clone https://github.com/BimaFdilana/project-app-web-laravel.git
 cd your-project-name
 ```
 
