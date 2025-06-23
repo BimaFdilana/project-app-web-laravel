@@ -67,4 +67,19 @@ public function index()
 
 ```
 
+
+## 🧭 Penggunaan Role di Route
+
+```javascript
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin', fn () => view('admin.dashboard'));
+});
+
+Route::middleware(['auth', 'role:kasir'])->group(function () {
+    Route::get('/kasir', fn () => view('kasir.dashboard'));
+});
+
+```
+
 **Start editing** the left panel to see your markdown come to life! 🚀
