@@ -5,7 +5,7 @@ It contains no additional packages, scaffolding, or customizations — perfect f
 
 ### 🚀 Features
 - ✅ Auth ( Login & Register )
-- ✅ Auth Role ( Admin & Member )
+- ✅ Auth Role ( Admin & User )
 - ✅ Auth View ( Component, Layout, Page )
 - ✅ Laravel Fortify 
 
