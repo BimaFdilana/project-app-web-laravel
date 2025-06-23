@@ -12,7 +12,6 @@
         <div class="card-header">
             <h4>Register</h4>
         </div>
-
         <div class="card-body">
             <form method="POST">
                 @csrf
@@ -20,6 +19,15 @@
                     <label for="name">Name</label>
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name">
                     @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="nim">NIM</label>
+                    <input id="nim" type="text" class="form-control @error('nim') is-invalid @enderror" name="nim">
+                    @error('nim')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
