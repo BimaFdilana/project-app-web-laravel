@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
+            'nim' => '1234567890',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
         // Kasir
         User::create([
             'name' => 'User',
+            'nim' => '1234567891',
             'email' => 'user@admin.com',
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
