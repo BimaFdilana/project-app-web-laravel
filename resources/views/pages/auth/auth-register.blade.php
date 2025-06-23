@@ -15,26 +15,44 @@
 
         <div class="card-body">
             <form method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name">
+                    @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email">
-                    <div class="invalid-feedback">
-                    </div>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email">
+                    @error('email')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="password" class="d-block">Password</label>
-                    <input id="password" type="password" class="form-control pwstrength" data-indicator="pwindicator"
-                        name="password">
-                    <div id="pwindicator" class="pwindicator">
-                        <div class="bar"></div>
-                        <div class="label"></div>
-                    </div>
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password">
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="password2" class="d-block">Password Confirmation</label>
-                    <input id="password2" type="password" class="form-control" name="password-confirm">
+                    <input id="password2" type="password" class="form-control @error('password') is-invalid @enderror" name="password_confirmation">
+                    @error('password')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
 
                 <div class="form-group">
@@ -61,7 +79,6 @@
 @push('scripts')
     <!-- JS Libraies -->
     <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
-    <script src="{{ asset('library/jquery.pwstrength/jquery.pwstrength.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/auth-register.js') }}"></script>
