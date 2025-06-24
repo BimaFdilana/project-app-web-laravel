@@ -8,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Akunbeben\FortifyRole\Traits\HasRole;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRole;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +24,6 @@ class User extends Authenticatable
         'nim',
         'email',
         'password',
-        'role',
         'no_hp',
         'jurusan',
         'prodi',
@@ -53,5 +53,10 @@ class User extends Authenticatable
     public function peminjamans(): HasMany
     {
         return $this->hasMany(Peminjaman::class);
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 }
