@@ -4,8 +4,61 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb4bade3497d8f0e318d6bfbfc9808d2",
+    "content-hash": "dc87e5c695ed3d727d8da7fe64da7fab",
     "packages": [
+        {
+            "name": "akunbeben/fortify-role",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/akunbeben/fortify-role.git",
+                "reference": "2df80de790a040211ad4bc54533df753d2bf4988"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/akunbeben/fortify-role/zipball/2df80de790a040211ad4bc54533df753d2bf4988",
+                "reference": "2df80de790a040211ad4bc54533df753d2bf4988",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^6.17",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Akunbeben\\FortifyRole\\FortifyRoleServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Akunbeben\\FortifyRole\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Benny Rahmat",
+                    "email": "akunbeben@gmail.com"
+                }
+            ],
+            "description": "Basic Multi Roles authentication package for Fortify.",
+            "support": {
+                "issues": "https://github.com/akunbeben/fortify-role/issues",
+                "source": "https://github.com/akunbeben/fortify-role/tree/v1.0.1"
+            },
+            "abandoned": true,
+            "time": "2021-05-17T20:57:32+00:00"
+        },
         {
             "name": "bacon/bacon-qr-code",
             "version": "v3.0.1",
