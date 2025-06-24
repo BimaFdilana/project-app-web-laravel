@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.auth.auth-login');
+Route::middleware('guest')->group(function () {
+    Route::get('/', function () {
+        return view('pages.auth.auth-login');
+    });
 });
 
 Route::middleware(['auth'])->group(function () {
