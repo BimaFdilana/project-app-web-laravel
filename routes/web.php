@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LaborController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('pages.apps.dashboard-general-dashboard', ['type_menu' => '']);
     })->name('home');
+
+    Route::resource('labors', LaborController::class);
 });

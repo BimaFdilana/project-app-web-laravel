@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('labors', function (Blueprint $table) {
             $table->id();
             $table->string('nama_labor');
+            $table->string('kapasitas');
             $table->text('deskripsi')->nullable();
             $table->string('penanggung_jawab')->nullable(); // Kolom teks biasa
             $table->text('asisten_labor')->nullable();     // Kolom teks biasa
