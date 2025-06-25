@@ -28,6 +28,7 @@ class User extends Authenticatable
         'jurusan',
         'prodi',
         'ktm_path',
+        'role_id',
     ];
 
     /**
@@ -58,5 +59,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
     }
 }

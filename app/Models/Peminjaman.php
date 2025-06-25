@@ -10,6 +10,8 @@ class Peminjaman extends Model
 {
     use HasFactory;
 
+    protected $table = 'peminjamans';
+
     /**
      * Atribut yang boleh diisi secara massal.
      */

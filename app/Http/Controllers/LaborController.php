@@ -11,14 +11,12 @@ class LaborController extends Controller
     public function index()
     {
         $labors = Labor::latest()->paginate(10);
-        // UBAH JALUR VIEW DI SINI
-        return view('pages.apps.laboratorium.index', compact('labors'));
+        return view('pages.apps.admin.laboratorium.index', compact('labors'));
     }
 
     public function create()
     {
-        // UBAH JALUR VIEW DI SINI
-        return view('pages.apps.laboratorium.create');
+        return view('pages.apps.admin.laboratorium.create');
     }
 
     public function store(Request $request)
@@ -54,13 +52,13 @@ class LaborController extends Controller
     public function show(Labor $labor)
     {
         // UBAH JALUR VIEW DI SINI (jika Anda membuat halaman show)
-        return view('pages.apps.laboratorium.show', compact('labor'));
+        return view('pages.apps.admin.laboratorium.show', compact('labor'));
     }
 
     public function edit(Labor $labor)
     {
         // UBAH JALUR VIEW DI SINI
-        return view('pages.apps.laboratorium.edit', compact('labor'));
+        return view('pages.apps.admin.laboratorium.edit', compact('labor'));
     }
 
     public function update(Request $request, Labor $labor)

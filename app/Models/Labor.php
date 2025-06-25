@@ -12,9 +12,10 @@ class Labor extends Model
 
     protected $guarded = ['id'];
 
+    protected $fillable = ['nama_labor', 'deskripsi', 'image_path', 'kapasitas', 'penanggung_jawab', 'asisten_labor', 'ketersediaan',];
+
     public function peminjamans(): HasMany
     {
         return $this->hasMany(Peminjaman::class);
     }
-
 }
