@@ -91,14 +91,14 @@ Buka browser dan akses aplikasi di `http://localhost:8000`.
 # 👥 Akun Default (Untuk Pengujian)
 
 ## Mahasiswa
-NIM: 202100123
-Email: mahasiswa@example.com
-Password: password
+NIM: 1234567890
+Email: budi@pinlab.com
+Password: password12345
 
 ## Kepala Labor
-NIM: 1978123456
-Email: kepala@example.com
-Password: password
+NIM: 0000000001
+Email: admin@pinlab.com
+Password: password12345
 
 
 
