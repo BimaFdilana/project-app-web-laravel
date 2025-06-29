@@ -1,85 +1,100 @@
-# Laravel 10
-This is a clean and minimal **Laravel 10** starter project.  
-It contains no additional packages, scaffolding, or customizations — perfect for starting fresh Laravel projects.
+# 📂 Website Pengarsipan Polbeng — Politeknik Negeri Bengkalis
+Repositori ini merupakan implementasi **Website Pengarsipan** berbasis web yang dikembangkan sebagai Proyek oleh **mahasiswa Politeknik Negeri Bengkalis**. Sistem ini ditujukan untuk mendukung proses pengarsipan dokumen secara digital, serta memudahkan admin dalam mengelola dan memverifikasi data yang diarsipkan
 
-
-### 🚀 Features
-- ✅ Auth ( Login & Register )
-- ✅ Auth Role ( Admin & User )
-- ✅ Auth View ( Component, Layout, Page )
-- ✅ Laravel Fortify 
-
-### 1. Clone the repository
-```javascript
-git clone https://github.com/BimaFdilana/project-app-web-laravel.git
-cd your-project-name
-```
-
-### 2. Install dependencies
-```javascript
-composer install
-```
-
-### 3. Copy .env file and set your environment
-```javascript
-cp .env.example .env
-```
-
-### 5. Run migrations & Start the development server
-```javascript
-php artisan migrate
-php artisan serve
-```
 ---
 
-### 🎯 Role-Based Access Control (RBAC) Sederhana di Laravel Fortify
-Aplikasi ini menggunakan sistem role sederhana untuk membatasi akses user ke halaman, route, dan fitur tertentu berdasarkan peran (role).
+## ✨ Fitur Utama
+1. 🔐 **Otentikasi Dua Peran (Role)**
+   Sistem memiliki dua peran pengguna:
+   - User — Mengunggah dan mengelola dokumen/arsip pribadi.
+   - Admin — Mengelola seluruh arsip, pengguna, dan sistem.
 
-## 🖼️ Penggunaan Role di Blade View
+2. 📥 **Login yang Mudah**
+   Pengguna dapat login menggunakan kombinasi email dan password yang sudah terdaftar.
 
-```javascript
+3. 🛡️ **Keamanan dengan Laravel Fortify**
+   Sistem keamanan login dibangun dengan Laravel Fortify untuk otentikasi yang aman dan fleksibel.
 
-{{-- Tampilkan menu khusus admin --}}
-@if (auth()->user()->role === 'admin')
-    <a href="/admin">Admin Panel</a>
-@endif
+4. ⚙️ **Sistem Pengarsipan yang Efisien**
+   Pengguna dapat mengunggah, mengkategorikan, dan mencari arsip dengan alur yang intuitif.
 
-{{-- Tampilkan menu kasir --}}
-@if (auth()->user()->role === 'kasir')
-    <a href="/kasir">Transaksi</a>
-@endif
+5. 🔔 **Notifikasi Real-Time**
+   Admin dan pengguna akan mendapatkan notifikasi secara langsung jika ada pembaruan penting atau perubahan status pada arsip yang relevan.
+---
 
+## 🚀 Cara Clone & Menjalankan Project
+
+Berikut adalah langkah-langkah untuk menjalankan aplikasi secara lokal:
+
+### 1. Clone Repository
+
+```bash
+git clone -b Pengarsipan-Polbeng https://github.com/BimaFdilana/project-app-web-laravel.git
+cd project-app-web-laravel
 ```
 
-## 🧩 Penggunaan Role di Controller
+### 2. Install Dependency
 
-```javascript
-
-public function index()
-{
-    if (auth()->user()->role !== 'admin') {
-        abort(403);
-    }
-
-    // logic admin
-    return view('admin.dashboard');
-}
-
+```bash
+composer install
+npm install
 ```
 
+### 3. Konfigurasi .Env
 
-## 🧭 Penggunaan Role di Route
+```bash
+cp .env.example .env
+```
+lalu sesuaikan .env dengan database yang akan digunakan
+```bash
+APP_NAME=LabApp
+APP_URL=http://localhost:8000
 
-```javascript
+DB_DATABASE=nama_database
+DB_USERNAME=root
+DB_PASSWORD=
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin', fn () => view('admin.dashboard'));
-});
-
-Route::middleware(['auth', 'role:kasir'])->group(function () {
-    Route::get('/kasir', fn () => view('kasir.dashboard'));
-});
-
+BROADCAST_DRIVER=pusher
+PUSHER_APP_ID=your_id
+PUSHER_APP_KEY=your_key
+PUSHER_APP_SECRET=your_secret
 ```
 
-**Start editing** the left panel to see your markdown come to life! 🚀
+### 4. Generate Key
+
+```bash
+php artisan key:generate
+```
+
+### 5. Migrate Database
+
+```bash
+php artisan key:generate
+php artisan migrate
+php artisan db:seed
+```
+
+### 6. Run Development Server
+
+```bash
+php artisan serve
+```
+
+### 7. Akses Aplikasi
+
+Buka browser dan akses aplikasi di `http://localhost:8000`.
+
+
+# 👥 Akun Default (Untuk Pengujian)
+
+## Mahasiswa
+NIM: 1234567890
+Email: budi@pinlab.com
+Password: password12345
+
+## Kepala Labor
+NIM: 0000000001
+Email: admin@pinlab.com
+Password: password12345
+
+
