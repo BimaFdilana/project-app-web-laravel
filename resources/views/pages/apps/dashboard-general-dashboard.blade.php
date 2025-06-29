@@ -16,7 +16,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6 col-12">
-                    @if (auth()->user()->role === 'admin')
+                    @if (auth()->user()->role_id === 1 || auth()->user()->role_id === 2)
                         <div class="card card-statistic-1">
                             <div class="card-icon bg-primary">
                                 <i class="far fa-user"></i>

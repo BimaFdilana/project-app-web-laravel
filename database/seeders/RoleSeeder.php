@@ -16,12 +16,16 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'admin',
-                'redirect_to' => '/home'
+                'name' => 'prodi',
+                'redirect_to' => '/'
             ],
             [
-                'name' => 'user',
-                'redirect_to' => '/home'
+                'name' => 'taskforce',
+                'redirect_to' => '/'
+            ],
+            [
+                'name' => 'assessor',
+                'redirect_to' => '/'
             ],
         ];
 
