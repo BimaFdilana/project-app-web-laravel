@@ -3369,11 +3369,11 @@ body.layout-3 .main-footer {
 }
 
 .main-sidebar .sidebar-brand {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   height: 60px;
-  line-height: 60px;
+  padding-left: 15px;
 }
 .main-sidebar .sidebar-brand.sidebar-brand-sm {
   display: none;
@@ -3384,6 +3384,22 @@ body.layout-3 .main-footer {
   letter-spacing: 1.5px;
   font-weight: 700;
   color: #000;
+}
+.sidebar-brand .brand-title {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 2px;
+  color: #000;
+}
+
+.sidebar-brand .brand-subtext {
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #666;
 }
 .main-sidebar .sidebar-user {
   display: inline-block;
@@ -3529,6 +3545,14 @@ body.layout-3 .main-footer {
   text-align: center;
   margin-top: 40px;
   margin-bottom: 40px;
+}
+
+body.sidebar-mini .sidebar-brand .brand-title,
+body.sidebar-mini .sidebar-brand .brand-subtext {
+  display: none !important;
+}
+body.sidebar-mini .sidebar-brand img {
+  display: none !important;
 }
 
 body:not(.sidebar-mini) .sidebar-style-1 .sidebar-menu li.active a {

@@ -18,4 +18,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return view('pages.apps.dashboard-general-dashboard', ['type_menu' => '']);
     })->name('home');
+
+    Route::get('/register', function () {
+        if (auth()->user()->role_id !== 1) {
+            abort(403, 'Unauthorized');
+        }
+        return view('pages.auth.auth-register');
+    })->name('register');
 });
