@@ -108,14 +108,21 @@
                                 </div>
                                 <div class="card-body">
                                     <ul class="list-unstyled list-unstyled-border">
+                                        @php $firstUnreadShown = false; @endphp
                                         @forelse($userNotifications as $notification)
                                             <li class="media">
                                                 <div class="media-icon"><i class="far fa-bell"></i></div>
                                                 <div class="media-body">
-                                                    <div class="float-right text-primary">
-                                                        {{ $notification->created_at->diffForHumans() }}</div>
+                                                    <div class="float-right text-right">
+                                                        <div class="text-primary">
+                                                            {{ $notification->created_at->diffForHumans() }}</div>
+                                                        @if (!$notification->is_read && !$firstUnreadShown)
+                                                            <span class="badge badge-success">Baru</span>
+                                                            @php $firstUnreadShown = true; @endphp
+                                                        @endif
+                                                    </div>
                                                     <div class="media-title">
-                                                        {{ $notification->is_read ? 'Pemberitahuan' : 'Pemberitahuan Baru' }}
+                                                        Pemberitahuan
                                                     </div>
                                                     <span class="text-small text-muted">{{ $notification->message }}</span>
                                                 </div>
@@ -123,6 +130,7 @@
                                         @empty
                                             <li class="text-center p-3">Tidak ada pemberitahuan.</li>
                                         @endforelse
+
                                     </ul>
                                     <div class="text-center pt-1 pb-1">{{ $userNotifications->links() }}</div>
                                 </div>
