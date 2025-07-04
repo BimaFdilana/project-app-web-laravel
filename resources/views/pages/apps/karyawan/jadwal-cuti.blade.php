@@ -17,7 +17,7 @@
         </div>
         <div class="controls">
             <div class="filter-group">
-                <label for="nameFilter">Nama Karyawan</label>
+                <label for="nameFilter">Nama</label>
                 <input type="text" id="nameFilter" class="filter-input" placeholder="Cari berdasarkan nama...">
             </div>
             <br>
@@ -35,7 +35,7 @@
                 <label for="yearFilter">Tahun</label>
                 <select id="yearFilter" class="filter-input">
                     <option value="">Semua Tahun</option>
-                    @for ($i = date('Y'); $i >= date('Y') - 2; $i--)
+                    @for ($i = date('Y'); $i >= 2000; $i--)
                         <option value="{{ $i }}">{{ $i }}</option>
                     @endfor
                 </select>
