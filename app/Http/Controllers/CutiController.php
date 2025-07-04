@@ -6,26 +6,42 @@ use App\Models\Cuti;
 use App\Models\User;
 use App\Models\Ruangan;
 use App\Notifications\CutiNotification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Database\Eloquent\Builder;
+use App\Exports\CutiExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CutiController extends Controller
 {
-    // Menampilkan semua data cuti
-    public function index()
+    public function index(Request $request)
     {
-        $cutis = Cuti::orderBy('tanggal_cuti', 'desc')->get();
+        $query = Cuti::query();
+
+        if ($request->has('nama') && $request->nama != '') {
+            $query->where('nama', 'like', '%' . $request->nama . '%');
+        }
+
+        if ($request->has('bulan') && $request->bulan != '') {
+            $query->whereMonth('tanggal_cuti', $request->bulan);
+        }
+
+        if ($request->has('tahun') && $request->tahun != '') {
+            $query->whereYear('tanggal_cuti', $request->tahun);
+        }
+
+        $cutis = $query->orderBy('tanggal_cuti', 'desc')->get();
+
         return view('pages.apps.admin.cuti.index', compact('cutis'));
     }
 
-    // Menampilkan form untuk membuat data baru
     public function create()
     {
-        $ruangans = Ruangan::all(); // Ambil semua data ruangan
+        $ruangans = Ruangan::all();
         return view('pages.apps.admin.cuti.create', compact('ruangans'));
     }
 
-    // Menyimpan data baru ke database
     public function store(Request $request)
     {
         $request->validate([
@@ -34,30 +50,25 @@ class CutiController extends Controller
             'tanggal_cuti' => 'required|date',
             'jumlah_cuti' => 'required|integer|min:1',
             'keperluan_cuti' => 'required|string',
+            'keterangan' => 'required|string',
         ]);
+        $cuti = Cuti::create($request->all());
 
-        $cuti = Cuti::create($request->all()); // Simpan ke variabel $cuti
-
-        // --- MULAI BLOK NOTIFIKASI ---
-        // 4. Ambil semua user admin (asumsi admin memiliki role 'admin')
-        $admins = User::where('role', 'admin')->get();
-        $message = "Pengajuan cuti baru dari " . $cuti->nama;
-
-        // Kirim notifikasi ke semua admin
+        $admins = User::whereHas('role', function (Builder $query) {
+            $query->where('name', 'admin');
+        })->get();
+        $message = "Cuti baru telah didaftarkan untuk " . $cuti->nama;
         Notification::send($admins, new CutiNotification($cuti, $message));
-        // --- SELESAI BLOK NOTIFIKASI ---
 
-        return redirect()->route('cuti.index')->with('success', 'Pengajuan Cuti berhasil dibuat.');
+        return redirect()->route('cuti.index')->with('success', 'Data Cuti berhasil dibuat.');
     }
 
-    // Menampilkan form untuk mengedit data
     public function edit(Cuti $cuti)
     {
-        $ruangans = Ruangan::all(); // Ambil semua data ruangan
-        return view('pages.apps.admin.cuti.edit', compact('cuti', 'ruangans')); // Kirim ke view
+        $ruangans = Ruangan::all();
+        return view('pages.apps.admin.cuti.edit', compact('cuti', 'ruangans'));
     }
 
-    // Mengupdate data di database
     public function update(Request $request, Cuti $cuti)
     {
         $request->validate([
@@ -66,16 +77,37 @@ class CutiController extends Controller
             'tanggal_cuti' => 'required|date',
             'jumlah_cuti' => 'required|integer|min:1',
             'keperluan_cuti' => 'required|string',
-            'status' => 'required|in:diajukan,diterima,ditolak',
-            'keterangan' => 'nullable|string',
+            'keterangan' => 'required|string',
         ]);
-
         $cuti->update($request->all());
-
         return redirect()->route('cuti.index')->with('success', 'Data Cuti berhasil diperbarui.');
     }
 
-    // Menghapus data dari database
+    public function showAllNotifications()
+    {
+        $notifications = Auth::user()->notifications()->paginate(10);
+
+        return view('pages.apps.admin.notifikasi.index', compact('notifications'));
+    }
+
+    public function markAllNotificationsAsRead()
+    {
+        Auth::user()->unreadNotifications->markAsRead();
+
+        return redirect()->back()->with('success', 'Semua notifikasi telah ditandai sebagai sudah dibaca.');
+    }
+
+    public function export(Request $request)
+    {
+        // Ambil filter dari request
+        $nama = $request->input('nama');
+        $bulan = $request->input('bulan');
+        $tahun = $request->input('tahun');
+
+        // Kirim filter ke CutiExport
+        return Excel::download(new CutiExport($nama, $bulan, $tahun), 'data-cuti-' . date('Y-m-d') . '.xlsx');
+    }
+
     public function destroy(Cuti $cuti)
     {
         $cuti->delete();

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Notifications\CutiNotification;
 use Illuminate\Support\Facades\Notification;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class CheckCutiStatus extends Command
 {
@@ -17,7 +18,9 @@ class CheckCutiStatus extends Command
     public function handle()
     {
         $today = Carbon::today();
-        $admins = User::where('role', 'admin')->get();
+        $admins = User::whereHas('role', function (Builder $query) {
+            $query->where('name', 'admin');
+        })->get();
 
         if ($admins->isEmpty()) {
             $this->info('Tidak ada user admin ditemukan.');

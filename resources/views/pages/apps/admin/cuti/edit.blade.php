@@ -47,18 +47,8 @@
                                 <label>Keperluan Cuti</label>
                                 <textarea class="form-control" name="keperluan_cuti" rows="3" required>{{ $cuti->keperluan_cuti }}</textarea>
                             </div>
-                            <hr>
-                            <h5>Update Status (oleh Admin)</h5>
                             <div class="form-group">
-                                <label>Status</label>
-                                <select name="status" class="form-control">
-                                    <option value="diajukan" @selected($cuti->status == 'diajukan')>Diajukan</option>
-                                    <option value="diterima" @selected($cuti->status == 'diterima')>Diterima</option>
-                                    <option value="ditolak" @selected($cuti->status == 'ditolak')>Ditolak</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Keterangan (opsional)</label>
+                                <label>Keterangan</label>
                                 <textarea class="form-control" name="keterangan" rows="2">{{ $cuti->keterangan }}</textarea>
                             </div>
                         </div>

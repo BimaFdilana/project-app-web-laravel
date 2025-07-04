@@ -15,8 +15,7 @@ return new class extends Migration
             $table->date('tanggal_cuti');
             $table->integer('jumlah_cuti');
             $table->text('keperluan_cuti');
-            $table->enum('status', ['diajukan', 'diterima', 'ditolak'])->default('diajukan');
-            $table->text('keterangan')->nullable();
+            $table->text('keterangan');
             $table->timestamps();
         });
     }

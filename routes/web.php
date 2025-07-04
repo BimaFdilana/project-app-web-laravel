@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CutiController;
 use App\Http\Controllers\RuanganController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PublicCutiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +17,20 @@ use App\Http\Controllers\RuanganController;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.apps.karyawan.index', ['type_menu' => '']);
-});
+Route::get('/', [PublicCutiController::class, 'index'])->name('cuti.public');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('home', function () {
-        return view('pages.apps.dashboard-general-dashboard', ['type_menu' => '']);
-    })->name('home');
+    Route::get('home', [DashboardController::class, 'index'])->name('home');
 
-
-
-    Route::resource('cuti', CutiController::class);
+    Route::resource('cuti', CutiController::class)->except(['show']);
 
     Route::resource('ruangan', RuanganController::class);
+
+    Route::get('notifications', [CutiController::class, 'showAllNotifications'])->name('notifications.index');
+
+    Route::post('notifications/mark-as-read', [CutiController::class, 'markAllNotificationsAsRead'])->name('notifications.markAsRead');
+
+    Route::get('cuti/export', [CutiController::class, 'export'])->name('cuti.export');
 
     Route::get('register', function () {
         return view('pages.auth.auth-register');

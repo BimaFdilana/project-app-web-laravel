@@ -47,6 +47,10 @@
                                 <label>Keperluan Cuti</label>
                                 <textarea class="form-control" name="keperluan_cuti" rows="3" required></textarea>
                             </div>
+                            <div class="form-group">
+                                <label>Keterangan</label>
+                                <textarea class="form-control" name="keterangan" rows="2"></textarea>
+                            </div>
                         </div>
                         <div class="card-footer text-right">
                             <a href="{{ route('cuti.index') }}" class="btn btn-secondary">Batal</a>

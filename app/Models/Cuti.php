@@ -12,70 +12,45 @@ class Cuti extends Model
     use HasFactory;
     use SoftDeletes;
 
-    // Mass assignment protection
     protected $fillable = [
         'nama',
         'ruangan',
         'tanggal_cuti',
         'jumlah_cuti',
         'keperluan_cuti',
-        'status',
         'keterangan',
     ];
 
-    // Cast 'tanggal_cuti' to Carbon object for easier manipulation
     protected $casts = [
         'tanggal_cuti' => 'date',
     ];
 
-    /**
-     * Accessor untuk menghitung tanggal akhir cuti.
-     * Nama method: get[NamaAtribut]Attribute
-     * Dipanggil di view sebagai: $cuti->tanggal_akhir_cuti
-     */
     public function getTanggalAkhirCutiAttribute()
     {
-        // Tanggal akhir adalah tanggal mulai ditambah jumlah hari cuti, dikurangi 1
-        // Contoh: Mulai tgl 4, jumlah 5 hari. Hari cuti: 4, 5, 6, 7, 8. Akhir = tgl 8.
         return $this->tanggal_cuti->addDays($this->jumlah_cuti - 1);
     }
 
-    /**
-     * Accessor untuk mendapatkan status progres cuti.
-     * Nama method: get[NamaAtribut]Attribute
-     * Dipanggil di view sebagai: $cuti->progres_cuti
-     */
-    public function getProgresCutiAttribute()
+    public function getProgresPersentaseAttribute()
     {
-        // Jika status bukan 'diterima', tidak perlu cek progres
-        if ($this->status !== 'diterima') {
-            return ucfirst($this->status); // 'Diajukan' atau 'Ditolak'
-        }
-
         $today = Carbon::today();
         $startDate = $this->tanggal_cuti;
-        $endDate = $this->tanggal_akhir_cuti; // Menggunakan accessor sebelumnya
+        $endDate = $this->tanggal_akhir_cuti;
 
         if ($today->isBefore($startDate)) {
-            return 'Belum Mulai';
+            return 0;
         }
-
-        if ($today->isSameDay($startDate)) {
-            return 'Mulai Cuti';
-        }
-
-        if ($today->isBetween($startDate, $endDate)) {
-            return 'Pertengahan Cuti';
-        }
-
-        if ($today->isSameDay($endDate)) {
-            return 'Cuti Berakhir';
-        }
-
         if ($today->isAfter($endDate)) {
-            return 'Selesai';
+            return 100;
         }
 
-        return 'Status Tidak Diketahui';
+        $totalDays = $this->jumlah_cuti;
+        if ($totalDays <= 0) {
+            return 0;
+        }
+
+        $daysPassed = $startDate->diffInDays($today) + 1;
+        $percentage = ($daysPassed / $totalDays) * 100;
+
+        return intval($percentage);
     }
 }
