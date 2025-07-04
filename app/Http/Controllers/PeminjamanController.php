@@ -48,7 +48,7 @@ class PeminjamanController extends Controller
             'status' => 'Diajukan',
         ]);
 
-        return redirect()->route('peminjaman.index')->with('success', 'Pengajuan peminjaman berhasil dikirim.');
+        return redirect()->route('home')->with('success', 'Pengajuan peminjaman berhasil dikirim.');
     }
 
     public function updateStatus(Request $request, Peminjaman $peminjaman)

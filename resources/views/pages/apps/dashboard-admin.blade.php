@@ -8,6 +8,20 @@
             </div>
             <div class="section-body">
                 {{-- Bagian Statistik (Tampil untuk semua role) --}}
+                @if (session('success'))
+                    <div class="alert alert-success alert-dismissible show fade">
+                        <div class="alert-body"><button class="close"
+                                data-dismiss="alert"><span>&times;</span></button>{{ session('success') }}
+                        </div>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible show fade">
+                        <div class="alert-body"><button class="close"
+                                data-dismiss="alert"><span>&times;</span></button>{{ session('error') }}
+                        </div>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                         <div class="card card-statistic-1">
